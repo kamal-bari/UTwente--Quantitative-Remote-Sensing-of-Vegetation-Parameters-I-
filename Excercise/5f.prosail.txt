@@ -1,0 +1,44 @@
+% prosail.m
+%
+% M. Schlerf 09-05-2007
+%
+% based on routines from F. Baret (Sail), S. Jacquemoud (Prospect)
+%
+% subroutines required: prospect.m, and sail.m
+%
+% [w,rc,rl]=prosail(N,Cab,Cw,Cm,rsl,LAI,ALA,to,ts,phi)
+%
+        % [w,rc,rl]=prosail(N,Cab,Cw,Cm,rsl,LAI,ALA,to,ts,phi,hot, skyl) NEW
+
+function [w,rc,rl]=prosail(N,Cab,Cw,Cm,rsl,LAI,ALA,to,ts,phi,hot,skyl)
+
+%________________________________________________________________
+
+% prospect.m
+
+% Input: N,Cab,Cw,Cm
+% Output: leaf reflectance (rl) and leaf transmittance (tl)
+% subroutines required: dataspec.m, s13aaf.m, and tav.m
+
+rt=prospect(N,Cab,Cw,Cm);
+
+w=rt(:,1);
+rl=rt(:,2);
+tl=rt(:,3);
+
+
+%________________________________________________________________
+
+% sail.m
+
+% Input: refl, trans, rs, LAI, ALA, to, ts, phi
+%
+        % Input: refl, trans, rs, LAI, ALA, to, ts, phi, hot, skyl   NEW
+%
+% Output: canopy reflectance (rc)
+% subroutines required: none
+
+rc=sail(rsl,rl,tl,LAI,ALA,to,ts,phi,hot,skyl);
+
+end
+
